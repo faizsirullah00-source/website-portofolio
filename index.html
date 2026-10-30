@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Pribadi - Digital Creative & Developer</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            accent: '#06b6d4'
+                        },
+                        dark: {
+                            bg: '#0f172a',
+                            card: '#1e293b',
+                            border: '#334155'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Glassmorphism Effect */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Gradient Glow Background */
+        .glow-bg {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, rgba(6, 182, 212, 0) 70%);
+            filter: blur(50px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Timeline Connector */
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            width: 2px;
+            background: linear-gradient(180deg, #6366f1 0%, #06b6d4 100%);
+        }
+
+        @media (min-width: 768px) {
+            .timeline-line::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Hover animations */
+        .hover-lift {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px -10px rgba(99, 102, 241, 0.3);
+        }
+    </style>
+</head>
+<body class="relative overflow-x-hidden selection:bg-brand-500 selection:text-white">
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="font-heading text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-500 to-brand-accent flex items-center justify-center text-white text-sm font-black">I</span>
+                <span>Izzaru<span class="text-brand-500">.dev</span></span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+                <a href="#tentang" class="hover:text-brand-500 transition-colors">Tentang Saya</a>
+                <a href="#kemampuan" class="hover:text-brand-500 transition-colors">Kemampuan</a>
+                <a href="#pendidikan" class="hover:text-brand-500 transition-colors">Pendidikan</a>
+                <a href="#kontak" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-brand-600 to-brand-accent text-white font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-brand-500/20">
+                    Hubungi Saya
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden text-slate-300 hover:text-white focus:outline-none p-2" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-card border-b border-slate-800 px-6 py-6 space-y-4">
+            <a href="#tentang" class="mobile-link block text-slate-300 hover:text-brand-500 text-lg font-medium">Tentang Saya</a>
+            <a href="#kemampuan" class="mobile-link block text-slate-300 hover:text-brand-500 text-lg font-medium">Kemampuan</a>
+            <a href="#pendidikan" class="mobile-link block text-slate-300 hover:text-brand-500 text-lg font-medium">Pendidikan</a>
+            <a href="#kontak" class="mobile-link block w-full text-center py-3 rounded-xl bg-gradient-to-r from-brand-600 to-brand-accent text-white font-semibold shadow-md">
+                Hubungi Saya
+            </a>
+        </div>
+    </header>
+
+    <!-- Background Glow Elements -->
+    <div class="glow-bg top-20 left-10"></div>
+    <div class="glow-bg top-1/3 right-10"></div>
+    <div class="glow-bg bottom-10 left-1/3"></div>
+
+    <!-- 1. HERO SECTION -->
+    <section class="min-h-screen pt-32 pb-20 flex items-center relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Text -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border border-brand-500/30 text-brand-500 text-xs sm:text-sm font-semibold tracking-wide">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        
+                    </div>
+
+                    <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                        Halo, Saya <span class="bg-gradient-to-r from-brand-500 via-brand-accent to-emerald-400 bg-clip-text text-transparent">Faiz Muzakki Sirullah</span>
+                    </h1>
+
+                    </p>
+
+                    <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Fokus menciptakan pengalaman digital yang intuitif, cepat, dan bernilai estetika tinggi. Berdedikasi mengubah ide kompleks menjadi aplikasi web yang bermanfaat.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#kontak" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-brand-600 to-brand-accent text-white font-semibold hover-lift shadow-lg shadow-brand-500/25 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane text-sm"></i>
+                            Hubungi Saya
+                        </a>
+                        <a href="#kemampuan" class="w-full sm:w-auto px-8 py-3.5 rounded-xl glass-card text-slate-200 font-semibold hover:bg-slate-800 transition-colors hover-lift flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-code text-sm"></i>
+                            Lihat Keahlian
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Profile Image -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative group">
+                        <!-- Outer Decorative Rings -->
+                        <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-brand-500 to-brand-accent opacity-75 blur-lg group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+                        
+                        <!-- Image Container -->
+                        <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full p-2 glass-card overflow-hidden">
+                            <img src="gambar.png" alt="Foto Profil Faiz Muzakki Sirullah" class="w-full h-full object-cover rounded-full group-hover:scale-105 transition duration-500">
+                        </div>
+
+                        <!-- Floating Badge -->
+                        <div class="absolute bottom-4 right-2 sm:right-4 glass-card border border-brand-500/40 py-2 px-4 rounded-xl shadow-xl flex items-center gap-3">
+                            <i class="fa-solid fa-laptop-code text-brand-accent text-xl"></i>
+                            <div>
+                                <p class="text-xs text-slate-400">Web Developer</p>
+                                <p class="text-sm font-semibold text-white">Faiz Muzakki Sirullah</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. TENTANG SAYA -->
+    <section id="tentang" class="py-20 relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Title -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-500 mb-2">Mengenal Lebih Dekat</h2>
+                <p class="font-heading text-3xl sm:text-4xl font-bold text-white">Tentang Saya</p>
+                <div class="w-16 h-1 bg-brand-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Main Bio Text -->
+                <div class="lg:col-span-7 glass-card p-8 rounded-2xl flex flex-col justify-between space-y-6">
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold text-white font-heading">Deskripsi</h3>
+                        <p class="text-slate-300 leading-relaxed">
+                            Saya adalah pribadi yang terus berusaha menjadi lebih baik, memiliki semangat untuk belajar, dan terbuka terhadap pengalaman baru. Saya percaya bahwa setiap proses adalah kesempatan untuk berkembang, memperbaiki diri, dan meraih tujuan. Dengan sikap disiplin, tanggung jawab, dan kemauan untuk terus belajar, saya ingin menjadi pribadi yang bermanfaat bagi diri sendiri maupun orang lain.
+                        </p>
+                    </div>
+
+                    <!-- Highlight Badges -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-700/50">
+                        <div class="p-3 rounded-xl bg-slate-800/50">
+                            <p class="text-xs text-slate-400">Lokasi</p>
+                            <p class="text-sm font-semibold text-white mt-1"><i class="fa-solid fa-location-dot text-brand-500 mr-1.5"></i>Surabaya, Jawa Timur</p>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-800/50">
+                            <p class="text-xs text-slate-400">Status</p>
+                            <p class="text-sm font-semibold text-white mt-1"><i class="fa-solid fa-graduation-cap text-brand-accent mr-1.5"></i>Mahasiswa</p>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-800/50 col-span-2 sm:col-span-1">
+                            <p class="text-xs text-slate-400">Spesialisasi</p>
+                            <p class="text-sm font-semibold text-white mt-1"><i class="fa-solid fa-code text-emerald-400 mr-1.5"></i>Python</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Cards -->
+                <div class="lg:col-span-5 grid grid-cols-1 gap-4">
+                    <div class="glass-card p-6 rounded-2xl hover-lift flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-paint-brush"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-1">Desain Grafis</h4>
+                            <p class="text-slate-400 text-sm">Membuat desain grafis yang menarik dan sesuai dengan kebutuhan proyek.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl hover-lift flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-brand-accent/10 text-brand-accent flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-1">Performa Optimis</h4>
+                            <p class="text-slate-400 text-sm">Menulis kode terstruktur, bersih, serta mengoptimalkan kecepatan akses situs.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl hover-lift flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-people-group"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-1">Kolaboratif</h4>
+                            <p class="text-slate-400 text-sm">Mampu berkomunikasi dengan baik dalam tim lintas disiplin untuk mencapai target.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 3. KEMAMPUAN (SKILLS) -->
+    <section id="kemampuan" class="py-20 relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-500 mb-2">Keahlian Utama</h2>
+                <p class="font-heading text-3xl sm:text-4xl font-bold text-white">Kemampuan</p>
+                <div class="w-16 h-1 bg-brand-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Skills Grid Container -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Programming -->
+                <div class="glass-card p-6 rounded-2xl hover-lift border-t-2 border-t-brand-500">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-lg bg-brand-500/20 text-brand-500 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Programming</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 rounded-xl bg-slate-800/40 hover:bg-slate-800/80 transition-colors">
+                            <span class="text-slate-200 font-medium text-sm flex items-center gap-2"><i class="fa-brands fa-html5 text-orange-500"></i> HTML5 & CSS3</span>
+                            <span class="text-xs font-semibold px-2 py-1 rounded bg-brand-500/20 text-brand-500">Pemula</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 rounded-xl bg-slate-800/40 hover:bg-slate-800/80 transition-colors">
+                            <span class="text-slate-200 font-medium text-sm flex items-center gap-2"><i class="fa-brands fa-js text-yellow-400"></i> JavaScript </span>
+                            <span class="text-xs font-semibold px-2 py-1 rounded bg-brand-500/20 text-brand-500">Pemula</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 rounded-xl bg-slate-800/40 hover:bg-slate-800/80 transition-colors">
+                            <span class="text-slate-200 font-medium text-sm flex items-center gap-2"><i class="fa-brands fa-python text-green-400"></i> Python</span>
+                            <span class="text-xs font-semibold px-2 py-1 rounded bg-brand-500/20 text-brand-500">Menengah</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Design & Soft Skills -->
+                <div class="glass-card p-6 rounded-2xl hover-lift border-t-2 border-t-emerald-400">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg font-bold">
+                            <i class="fa-solid fa-pen-ruler"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">Desain & Lainnya</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center p-3 rounded-xl bg-slate-800/40 hover:bg-slate-800/80 transition-colors">
+                            <span class="text-slate-200 font-medium text-sm flex items-center gap-2"><i class="fa-brands fa- text-purple-400"></i> Canva </span>
+                            <span class="text-xs font-semibold px-2 py-1 rounded bg-emerald-500/20 text-emerald-400">Mahir</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 rounded-xl bg-slate-800/40 hover:bg-slate-800/80 transition-colors">
+                            <span class="text-slate-200 font-medium text-sm flex items-center gap-2"><i class="fa-solid fa-P text-pink-400"></i> PixelLab </span>
+                            <span class="text-xs font-semibold px-2 py-1 rounded bg-emerald-500/20 text-emerald-400">Mahir</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 rounded-xl bg-slate-800/40 hover:bg-slate-800/80 transition-colors">
+                            <span class="text-slate-200 font-medium text-sm flex items-center gap-2"><i class="fa-solid  text-amber-400"></i> Komunikasi Tim</span>
+                            <span class="text-xs font-semibold px-2 py-1 rounded bg-emerald-500/20 text-emerald-400">Baik</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 rounded-xl bg-slate-800/40 hover:bg-slate-800/80 transition-colors">
+                            <span class="text-slate-200 font-medium text-sm flex items-center gap-2"><i class="fa-solid text-yellow-300"></i> Problem Solving</span>
+                            <span class="text-xs font-semibold px-2 py-1 rounded bg-emerald-500/20 text-emerald-400">Baik</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 4. RIWAYAT PENDIDIKAN -->
+    <section id="pendidikan" class="py-20 relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-500 mb-2">Latar Belakang</h2>
+                <p class="font-heading text-3xl sm:text-4xl font-bold text-white">Riwayat Pendidikan</p>
+                <div class="w-16 h-1 bg-brand-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Timeline Container -->
+            <div class="relative timeline-line max-w-4xl mx-auto space-y-8">
+                
+                <!-- Education Item 1 -->
+                <div class="relative flex flex-col md:flex-row items-start group">
+                    <!-- Timeline Circle Icon -->
+                    <div class="absolute left-0 md:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-slate-900 border-2 border-brand-500 flex items-center justify-center text-brand-500 z-10 group-hover:scale-110 group-hover:bg-brand-500 group-hover:text-white transition-all shadow-lg shadow-brand-500/30">
+                        <i class="fa-solid fa-graduation-cap text-sm"></i>
+                    </div>
+
+                    <!-- Content Card Left/Right layout for MD -->
+                    <div class="ml-14 md:ml-0 md:w-1/2 md:pr-12 md:text-right w-full">
+                        <div class="glass-card p-6 rounded-2xl hover-lift">
+                            <span class="inline-block px-3 py-1 rounded-full bg-brand-500/20 text-brand-500 font-semibold text-xs mb-2">2026</span>
+                            <h3 class="text-xl font-bold text-white font-heading">S1 Sistem Informasi</h3>
+                            <p class="text-brand-accent font-medium text-sm mb-2">Universitas Negeri Surabaya</p>
+                            <p class="text-slate-400 text-sm leading-relaxed">
+                                Mahasiswa aktif di Universitas Negeri Surabaya, masih dalam proses belajar dan mengembangkan kemampuan di bidang sistem informasi dan pengembangan web.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education Item 2 -->
+                <div class="relative flex flex-col md:flex-row items-start group">
+                    <div class="absolute left-0 md:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-slate-900 border-2 border-brand-accent flex items-center justify-center text-brand-accent z-10 group-hover:scale-110 group-hover:bg-brand-accent group-hover:text-white transition-all shadow-lg shadow-brand-accent/30">
+                        <i class="fa-solid fa-certificate text-sm"></i>
+                    </div>
+
+                    <div class="ml-14 md:ml-0 md:w-1/2 md:pl-12 md:ml-auto w-full">
+                        <div class="glass-card p-6 rounded-2xl hover-lift">
+                            <span class="inline-block px-3 py-1 rounded-full bg-brand-accent/20 text-brand-accent font-semibold text-xs mb-2">2023 - 2026</span>
+                            <h3 class="text-xl font-bold text-white font-heading">SMA Bina Insan Mandiri</h3>
+                            <p class="text-brand-accent font-medium text-sm mb-2">Nganjuk, Jawa Timur</p>
+                            <p class="text-slate-400 text-sm leading-relaxed">
+                                Menyelesaikan pendidikan menengah atas dengan fokus pada pengembangan keterampilan akademik dan persiapan untuk pendidikan tinggi.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education Item 3 -->
+                <div class="relative flex flex-col md:flex-row items-start group">
+                    <div class="absolute left-0 md:left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-slate-900 border-2 border-slate-600 flex items-center justify-center text-slate-400 z-10 group-hover:scale-110 group-hover:bg-slate-700 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-school text-sm"></i>
+                    </div>
+
+                    <div class="ml-14 md:ml-0 md:w-1/2 md:pr-12 md:text-right w-full">
+                        <div class="glass-card p-6 rounded-2xl hover-lift">
+                            <span class="inline-block px-3 py-1 rounded-full bg-slate-700 text-slate-300 font-semibold text-xs mb-2">2021 - 2023</span>
+                            <h3 class="text-xl font-bold text-white font-heading">SMP Bina Insan Mandiri</h3>
+                            <p class="text-brand-accent font-medium text-sm mb-2">Nganjuk, Jawa Timur</p>
+                            <p class="text-slate-400 text-sm leading-relaxed">
+                                Menyelesaikan pendidikan menengah pertama dengan fokus pada pengembangan dasar akademik dan keterampilan sosial.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 5. KONTAK -->
+    <section id="kontak" class="py-20 relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <p class="font-heading text-3xl sm:text-4xl font-bold text-white">Hubungi Saya</p>
+                <div class="w-16 h-1 bg-brand-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                
+                <!-- Contact Info Sidebar -->
+                <div class="lg:col-span-12 space-y-6">
+                    <div class="glass-card p-8 rounded-2xl space-y-6">
+                        <h3 class="text-2xl font-bold text-white font-heading">Informasi Kontak</h3>
+                        </p>
+
+                        <div class="space-y-4 pt-2">
+                            <!-- Direct Email -->
+                            <a href="mailto:faizsirullah00@gmail.com" class="flex items-center gap-4 p-4 rounded-xl bg-slate-800/40 hover:bg-slate-800 border border-slate-700/50 hover:border-brand-500 transition-all group">
+                                <div class="w-12 h-12 rounded-lg bg-brand-500/20 text-brand-500 group-hover:bg-brand-500 group-hover:text-white flex items-center justify-center text-xl transition-all">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400">Email Direct</p>
+                                    <p class="text-sm font-semibold text-white">faizsirullah00@gmail.com</p>
+                                </div>
+                            </a>
+
+                            <!-- WhatsApp -->
+                            <a href="https://wa.me/" target="_blank" class="flex items-center gap-4 p-4 rounded-xl bg-slate-800/40 hover:bg-slate-800 border border-slate-700/50 hover:border-emerald-500 transition-all group">
+                                <div class="w-12 h-12 rounded-lg bg-emerald-500/20 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white flex items-center justify-center text-xl transition-all">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400">WhatsApp / Telepon</p>
+                                    <p class="text-sm font-semibold text-white">+62 85881823102</p>
+                                </div>
+                            </a>
+
+                            <!-- LinkedIn -->
+                            <a href="https://linkedin.com" target="_blank" class="flex items-center gap-4 p-4 rounded-xl bg-slate-800/40 hover:bg-slate-800 border border-slate-700/50 hover:border-brand-accent transition-all group">
+                                <div class="w-12 h-12 rounded-lg bg-brand-accent/20 text-brand-accent group-hover:bg-brand-accent group-hover:text-white flex items-center justify-center text-xl transition-all">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400">LinkedIn</p>
+                                    <p class="text-sm font-semibold text-white">www.linkedin.com/in/faiz-muzakki-sirullah-ab4472423</p>
+                                </div>
+                            </a>
+
+                            <!-- Instagram -->
+                            <a href="https://www.instagram.com/izzaru._/" target="_blank" class="flex items-center gap-4 p-4 rounded-xl bg-slate-800/40 hover:bg-slate-800 border border-slate-700/50 hover:border-brand-accent transition-all group">
+                                <div class="w-12 h-12 rounded-lg bg-brand-accent/20 text-brand-accent group-hover:bg-brand-accent group-hover:text-white flex items-center justify-center text-xl transition-all">
+                                    <i class="fa-brands fa-instagram"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400">Instagram</p>
+                                    <p class="text-sm font-semibold text-white">www.instagram.com/izzaru._/</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Interactive Form -->
+                <div class="lg:col-span-7">
+                        <form id="contact-form" class="space-y-6">
+                            <!-- Feedback Message Box (Hidden by default) -->
+                            <div id="form-alert" class="hidden p-4 rounded-xl text-sm font-medium text-center"></div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 py-8 bg-slate-950/50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500 text-sm">
+            <p>© 2026 Faiz Muzakki. Seluruh hak cipta dilindungi.</p>
+            <p class="flex items-center gap-1">
+                Dibuat dengan <i class="fa-solid text-rose-500 text-xs"></i> menggunakan HTML & Tailwind CSS
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when link clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Interactive Form Handler
+        const contactForm = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const formAlert = document.getElementById('form-alert');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simulasikan pengiriman data
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch animate-spin"></i> Mengirim...';
+
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Kirim Pesan';
+
+                // Tampilkan pesan sukses
+                formAlert.classList.remove('hidden', 'bg-red-500/20', 'text-red-400');
+                formAlert.classList.add('bg-emerald-500/20', 'text-emerald-400', 'border', 'border-emerald-500/30');
+                formAlert.innerText = 'Pesan Anda berhasil terkirim! Terima kasih telah menghubungi saya.';
+
+                contactForm.reset();
+
+                // Sembunyikan notifikasi setelah 5 detik
+                setTimeout(() => {
+                    formAlert.classList.add('hidden');
+                }, 5000);
+            }, 1200);
+        });
+    </script>
+</body>
+</html>
